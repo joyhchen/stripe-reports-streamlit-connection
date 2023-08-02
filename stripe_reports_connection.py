@@ -9,9 +9,9 @@ class StripeReportsConnection(ExperimentalBaseConnection):
 
         self.conn = stripe.reporting.ReportRun
     
-    def get(self, report_type, interval_start, interval_end):
+    def query(self, report_type, interval_start, interval_end):
         @st.cache_data
-        def _get(_report_type, _interval_start, _interval_end):
+        def _query(_report_type, _interval_start, _interval_end):
             return self.conn.create(
                 report_type=_report_type,
                 parameters={
@@ -19,4 +19,12 @@ class StripeReportsConnection(ExperimentalBaseConnection):
                     'interval_end': _interval_end
                 }
             )
-        return _get(report_type, interval_start, interval_end)
+        return _query(report_type, interval_start, interval_end)
+
+    def get(self, report_id):
+        @st.cache_data
+        def _get(report_id):
+            return self.conn.retrieve(
+                report_id
+            )
+        return _get(report_id)

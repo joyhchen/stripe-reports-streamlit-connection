@@ -21,6 +21,14 @@ report_type = 'balance.summary.1'
 interval_start = six_months_ago_int
 interval_end = two_days_ago_int
 
-data = conn.get(report_type=report_type, interval_start=interval_start, interval_end=interval_end)
+report_run = conn.query(report_type=report_type, interval_start=interval_start, interval_end=interval_end)
 
-st.write(data)
+st.write("Ran report...")
+st.write(report_run)
+
+st.write("Paste your report run to verify its status")
+
+query_id = st.text_input("Report run ID (frr_***)")
+if query_id:
+    retrieved_report = conn.get(query_id)
+    st.write(retrieved_report)
