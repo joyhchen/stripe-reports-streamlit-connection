@@ -9,7 +9,7 @@ six_months_ago_int = int(six_months_ago.timestamp())
 two_days_ago = datetime.now() - relativedelta(days=2)
 two_days_ago_int=int(two_days_ago.timestamp())
 
-st.header('Show me the balance summary report for the interval starting 6 months ago and ending two days ago')
+st.header('Show me the Stripe balance summary report for the interval starting 6 months ago and ending two days ago')
 st.write('Start time', six_months_ago)
 st.write('End time', two_days_ago)
 
